@@ -8,7 +8,12 @@ import { HomeComponent } from './home/home.component';
 import { QuienSoyComponent } from './quien-soy/quien-soy.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, QuienSoyComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    QuienSoyComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

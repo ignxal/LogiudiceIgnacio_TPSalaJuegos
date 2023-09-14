@@ -1,32 +1,30 @@
-<div class="login-container">
-  <form class="form-signin">
-    <h2 class="form-signin-heading">Please login</h2>
-    <input
-      type="text"
-      class="form-control"
-      name="username"
-      placeholder="Email Address"
-      required=""
-      autofocus=""
-    />
-    <input
-      type="password"
-      class="form-control"
-      name="password"
-      placeholder="Password"
-      required=""
-    />
-    <label class="checkbox">
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <h2 class="active">Sign In</h2>
+    <form (submit)="onSubmit()">
       <input
-        type="checkbox"
-        value="remember-me"
-        id="rememberMe"
-        name="rememberMe"
+        type="text"
+        id="login"
+        class="fadeIn second"
+        name="login"
+        [(ngModel)]="email"
+        placeholder="Email"
+        required
       />
-      Remember me
-    </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
-      Login
-    </button>
-  </form>
+      <input
+        type="password"
+        id="password"
+        class="fadeIn third"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="Password"
+        required
+      />
+      <input type="submit" class="fadeIn fourth" value="Log In" />
+    </form>
+
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+  </div>
 </div>
