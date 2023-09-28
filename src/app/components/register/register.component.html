@@ -20,24 +20,18 @@
         placeholder="Contraseña"
         required
       />
-      <button type="submit" class="fadeIn fourth" (click)="onLogin()">
-        Ingresar
-      </button>
-      <button
-        id="btn-google"
-        type="submit"
-        class="fadeIn fourth"
-        (click)="onLoginGoogle()"
-      >
-        Ingresar con Google
+      <input
+        type="password"
+        id="password_confirmation"
+        class="fadeIn third"
+        name="password_confirmation"
+        [(ngModel)]="usuario.passwordConfirmation"
+        placeholder="Confirmar contraseña"
+        required
+      />
+      <button type="submit" class="fadeIn fourth" (click)="onRegister()">
+        Registrarme
       </button>
     </form>
-
-    <div id="formFooter">
-      <label
-        >Todavia no tenes cuenta?
-        <a class="underlineHover" href="/register">Registrarse</a></label
-      >
-    </div>
   </div>
 </div>
