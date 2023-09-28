@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
@@ -11,13 +12,13 @@ export class LoginComponent {
     email: '',
     password: '',
   };
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
     const { email, password } = this.usuario;
 
     this.authService.register(email, password).then((res) => {
-      console.log(res);
+      this.router.navigate(['/']);
     });
   }
 
@@ -25,7 +26,7 @@ export class LoginComponent {
     const { email, password } = this.usuario;
 
     this.authService.loginWithGoogle(email, password).then((res) => {
-      console.log(res);
+      this.router.navigate(['/']);
     });
   }
 }

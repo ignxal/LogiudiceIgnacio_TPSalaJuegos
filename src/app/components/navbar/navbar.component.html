@@ -1,1 +1,24 @@
-<p>navbar works!</p>
+<nav class="navbar bg-body-tertiary">
+  <a class="navbar-brand title" href="#">SUPER SALITA DE JUEGOS</a>
+  <ng-container *ngIf="userLogged | async as user; else loginButton">
+    <div class="d-flex align-items-center" style="margin-right: 1em">
+      <a class="navbar-brand user" href="#">
+        <img
+          *ngIf="user.photoURL"
+          [src]="user.photoURL"
+          width="45"
+          height="45"
+          class="d-inline-block align-center m-2"
+          style="border-radius: 100%"
+        />
+        {{ user.photoURL ? "" : user.email }}
+      </a>
+      <button class="btn btn-danger" (click)="onLogout()">LOGOUT</button>
+    </div>
+  </ng-container>
+  <ng-template #loginButton style="margin-right: 1em">
+    <div class="d-flex align-items-center" style="margin-right: 1em">
+      <button class="btn btn-primary" (click)="onLogin()">LOGIN</button>
+    </div>
+  </ng-template>
+</nav>
