@@ -11,6 +11,8 @@ import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './components/register/register.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { RegisterComponent } from './components/register/register.component';
     QuienSoyComponent,
     NavbarComponent,
     RegisterComponent,
+    PageNotFoundComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

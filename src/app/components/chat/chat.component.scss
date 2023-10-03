@@ -1,0 +1,83 @@
+.cardContainer {
+  width: 300px;
+  height: 500px;
+  position: fixed;
+  right: 0.5rem;
+  bottom: 0.5rem;
+}
+
+.card-header {
+  background-color: lightblue;
+  color: white;
+  font-weight: 700;
+}
+
+.card-body {
+  padding: 0.5rem;
+  background-image: url("https://i.pinimg.com/236x/88/57/0e/88570e500312820cf8873d180d05f0c0.jpg");
+}
+
+.containerMessages {
+  overflow: scroll;
+  padding: 0.3rem;
+}
+
+.containerMessages::-webkit-scrollbar {
+  display: none;
+}
+
+.sent {
+  display: block;
+  float: right;
+  background-color: purple;
+  color: white;
+  min-width: 50.01%;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.received {
+  display: block;
+  float: left;
+  background-color: grey;
+  color: white;
+  min-width: 50.01%;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.closeIcon:hover,
+.imgSend:hover {
+  cursor: pointer;
+}
+
+.closeIcon:active,
+.imgSend:active {
+  transform: scale(0.9);
+}
+
+.chatIconContainer {
+  position: fixed;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  background-color: lightgrey;
+  border-radius: 100%;
+  box-shadow: 0 0 10px 2px gray;
+}
+
+.chatIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.closeIcon {
+  position: absolute;
+  right: 0.5rem;
+  top: 0;
+}

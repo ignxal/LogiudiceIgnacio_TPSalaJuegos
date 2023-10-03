@@ -1,0 +1,52 @@
+<div
+  *ngIf="loggedUser && !displayChat"
+  class="chatIconContainer"
+  (click)="displayChat = true"
+>
+  <img
+    src="https://es.seaicons.com/wp-content/uploads/2015/10/Chat-icon.png"
+    class="chatIcon"
+    alt="Chat icon"
+  />
+</div>
+<div class="card text-center cardContainer" *ngIf="loggedUser && displayChat">
+  <div class="card-header">
+    CHAT
+    <div class="closeIcon" (click)="displayChat = false">x</div>
+  </div>
+
+  <div class="card-body">
+    <div id="containerMessages" class="containerMessages h-100">
+      <p
+        *ngFor="let mssg of messages"
+        class="mssg p-2"
+        [ngClass]="loggedUser.uid == mssg.from ? 'sent' : 'received'"
+      >
+        {{ mssg.text }}
+      </p>
+    </div>
+  </div>
+
+  <form
+    class="card-footer text-body-secondary input-group"
+    (ngSubmit)="sendMessage()"
+  >
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Ingrese su mensaje"
+      [(ngModel)]="newMessage"
+      [ngModelOptions]="{ standalone: true }"
+    />
+    <div class="input-group-append" (click)="sendMessage()">
+      <span class="input-group-text" id="basic-addon2"
+        ><img
+          class="imgSend"
+          src="https://icons-for-free.com/iconfiles/png/512/send+icon-1320185654900887696.png"
+          alt="Send message"
+          width="25px"
+          height="25px"
+      /></span>
+    </div>
+  </form>
+</div>
