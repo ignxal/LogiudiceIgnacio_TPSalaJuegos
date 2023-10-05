@@ -1,0 +1,143 @@
+.b-example-divider {
+  height: 3rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: solid rgba(0, 0, 0, 0.15);
+  border-width: 1px 0;
+  box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
+}
+
+.container {
+  backdrop-filter: blur(6px);
+  background: #00000047;
+}
+
+$mygradient: linear-gradient(-90deg, #72ff8c, #237a36);
+$mygradient2: linear-gradient(
+  90deg,
+  rgba(107, 255, 107, 0.2) 0%,
+  rgba(11, 59, 20, 0.2) 100%
+);
+$mngradient: linear-gradient(-90deg, #ff7272, #942e2e);
+$mngradient2: linear-gradient(
+  90deg,
+  rgba(255, 107, 107, 0.2) 0%,
+  rgba(59, 11, 11, 0.2) 100%
+);
+
+.btn-higher {
+  position: relative;
+  margin: 0 auto;
+  color: transparent;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-image: $mygradient;
+  border-image-slice: 1;
+  background: $mygradient;
+  -webkit-background-clip: text;
+  transition: 0.3s;
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: $mygradient2;
+    opacity: 0;
+    transition: 0.3s ease;
+  }
+  &:hover {
+    color: rgba(255, 255, 255, 0.95);
+
+    &:before {
+      opacity: 1;
+    }
+  }
+}
+
+.btn-higher svg {
+  color: #54d66b;
+}
+
+.btn-lower {
+  position: relative;
+  margin: 0 auto;
+  color: transparent;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-image: $mngradient;
+  border-image-slice: 1;
+  background: $mngradient;
+  -webkit-background-clip: text;
+  transition: 0.3s;
+
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: $mngradient2;
+    opacity: 0;
+    transition: 0.3s ease;
+  }
+  &:hover {
+    color: rgba(255, 255, 255, 0.95);
+
+    &:before {
+      opacity: 1;
+    }
+  }
+}
+
+.btn-lower svg {
+  color: #cd5151;
+}
+
+.bi {
+  vertical-align: -0.4em;
+  fill: currentColor;
+}
+
+img {
+  width: 25%;
+  min-width: 200px;
+}
+
+.cartas {
+  max-width: 84%;
+  min-width: 200px;
+  margin: auto;
+  display: table;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  color: #ffffff;
+  border-radius: 0.75rem;
+}
+
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+}
+.icon-link > .bi {
+  margin-top: 0.125rem;
+  margin-left: 0.125rem;
+  transition: transform 0.25s ease-in-out;
+  fill: currentColor;
+}
+.icon-link:hover > .bi {
+  transform: translate(0.25rem);
+}

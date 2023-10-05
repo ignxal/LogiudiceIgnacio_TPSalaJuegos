@@ -14,6 +14,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { HangmanComponent } from './components/hangman/hangman.component';
+import { HigherorlowerComponent } from './components/higherorlower/higherorlower.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HangmanComponent } from './components/hangman/hangman.component';
     PageNotFoundComponent,
     ChatComponent,
     HangmanComponent,
+    HigherorlowerComponent,
   ],
   imports: [
     BrowserModule,

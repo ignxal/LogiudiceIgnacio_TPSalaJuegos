@@ -1,0 +1,69 @@
+<br />
+<div
+  class="container py-5 px-5 rounded-3 shadow-lg text-white"
+  style="max-width: 1040px"
+>
+  <h2 class="pb-2 border-bottom">Mayor o Menor</h2>
+  <div style="margin-top: 70px">
+    <div class="cards">
+      <img
+        src="../../../assets/cards/{{ this.previousCard || 'sword-1.png' }}"
+      />
+
+      <div style="display: contents">
+        <button
+          style="margin: 25px"
+          class="btn btn-higher btn-lg px-4 gap-3"
+          (click)="higher()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="30"
+            fill="currentColor"
+            class="bi bi-arrow-up-short"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"
+            /></svg
+          >Mayor
+        </button>
+        <button
+          style="margin: 25px"
+          class="btn btn-lower btn-lg px-4 gap-3"
+          (click)="lower()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="30"
+            fill="currentColor"
+            class="bi bi-arrow-down-short"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"
+            /></svg
+          >Menor
+        </button>
+      </div>
+
+      <img src="../../../assets/cards/back.png" *ngIf="!reveal" />
+      <img
+        class="flip-in-ver-left"
+        *ngIf="reveal"
+        src="../../../assets/cards/{{ this.randomCard }}"
+      />
+    </div>
+
+    <h3 style="text-align: center; margin-top: 45px">
+      <img
+        style="width: 50px; min-width: auto"
+        id="score"
+        src="../../../assets/score.png"
+      />
+      {{ this.score }}
+    </h3>
+  </div>
+</div>
