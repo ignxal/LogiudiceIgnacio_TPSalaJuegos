@@ -30,12 +30,19 @@ export class ChatComponent {
       date: this._getCurrentFormattedHours(),
     },
   ];
+  subscription: any;
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.getUserLogged().subscribe((u) => {
+    this.subscription = this.authService.getUserLogged().subscribe((u) => {
       this.loggedUser = u;
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   sendMessage() {

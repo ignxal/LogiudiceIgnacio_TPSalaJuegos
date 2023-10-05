@@ -71,6 +71,7 @@ export class HigherorlowerComponent implements OnInit {
   userLogged: any;
   highestHigherOrLowerScore: number = 0;
   isHigher: boolean = false;
+  subscription: any;
 
   constructor(
     private router: Router,
@@ -86,7 +87,7 @@ export class HigherorlowerComponent implements OnInit {
       this.databaseService
         .getByFieldValue('records', 'user_id', this.userLogged.uid)
         .then((res) => {
-          res?.subscribe((querySnapshot) => {
+          this.subscription = res?.subscribe((querySnapshot) => {
             if (!querySnapshot || querySnapshot.empty) {
               console.log('Document not found');
               this.highestHigherOrLowerScore = 0;
@@ -107,6 +108,12 @@ export class HigherorlowerComponent implements OnInit {
 
       this.startGame();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   startGame() {

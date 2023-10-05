@@ -81,6 +81,7 @@ export class HangmanComponent implements OnInit {
   usedWords: Array<string> = [];
   userLogged: any = '';
   highestHangmanScore: number = 0;
+  subscription: any;
 
   constructor(
     private router: Router,
@@ -89,7 +90,7 @@ export class HangmanComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getUserLogged().subscribe((u) => {
+    this.subscription = this.authService.getUserLogged().subscribe((u) => {
       if (!u) return;
       this.userLogged = u;
 
@@ -105,7 +106,6 @@ export class HangmanComponent implements OnInit {
 
             const docRef = querySnapshot.docs[0];
             const user: any = docRef.data();
-            console.log(user);
             this.highestHangmanScore = user?.highestHangmanScore || 0;
           });
         })
@@ -116,6 +116,12 @@ export class HangmanComponent implements OnInit {
 
       this.createWord();
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   createWord() {
