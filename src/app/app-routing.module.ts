@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { QuienSoyComponent } from './components/quien-soy/quien-soy.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { HangmanComponent } from './components/hangman/hangman.component';
 
 const routes: Routes = [
   { pathMatch: 'full', path: '', redirectTo: 'home' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'aboutme', component: QuienSoyComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'hangman', component: HangmanComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

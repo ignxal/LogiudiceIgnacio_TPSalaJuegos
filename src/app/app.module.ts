@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { HangmanComponent } from './components/hangman/hangman.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ChatComponent } from './components/chat/chat.component';
     RegisterComponent,
     PageNotFoundComponent,
     ChatComponent,
+    HangmanComponent,
   ],
   imports: [
     BrowserModule,
