@@ -40,7 +40,7 @@ export class ChatComponent {
 
   sendMessage() {
     if (!this.newMessage) return;
-    console.log(this.loggedUser);
+
     const mssg = {
       from: this.loggedUser.uid,
       name: this.loggedUser.displayName,

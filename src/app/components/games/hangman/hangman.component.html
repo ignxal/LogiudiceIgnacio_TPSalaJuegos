@@ -23,9 +23,9 @@
   <div style="display: inline-flex">
     <h2
       style="display: inline-flex; margin-right: 15px"
-      *ngFor="let letra of this.formedWord"
+      *ngFor="let letter of this.formedWord"
     >
-      {{ letra }}
+      {{ letter }}
     </h2>
   </div>
 
@@ -34,35 +34,35 @@
 
     <div style="margin: auto">
       <button
-        *ngFor="let letra of this.keyboardFirstRow"
+        *ngFor="let letter of this.keyboardFirstRow"
         type="button"
         class="btn btn-light keyboardBtn btn-lg px-4 gap-3"
-        id="{{ letra }}"
-        (click)="changeLetter(letra)"
+        id="{{ letter }}"
+        (click)="changeLetter(letter)"
       >
-        {{ letra }}
+        {{ letter }}
       </button>
     </div>
     <div style="margin: auto; margin-top: 3px">
       <button
-        *ngFor="let letra of this.keyboardSecondRow"
+        *ngFor="let letter of this.keyboardSecondRow"
         type="button"
         class="btn btn-light keyboardBtn btn-lg px-4 gap-3"
-        id="{{ letra }}"
-        (click)="changeLetter(letra)"
+        id="{{ letter }}"
+        (click)="changeLetter(letter)"
       >
-        {{ letra }}
+        {{ letter }}
       </button>
     </div>
     <div style="margin: auto; margin-top: 3px">
       <button
-        *ngFor="let letra of this.keyboardThirdRow"
+        *ngFor="let letter of this.keyboardThirdRow"
         type="button"
         class="btn btn-light keyboardBtn btn-lg px-4 gap-3"
-        id="{{ letra }}"
-        (click)="changeLetter(letra)"
+        id="{{ letter }}"
+        (click)="changeLetter(letter)"
       >
-        {{ letra }}
+        {{ letter }}
       </button>
     </div>
   </div>
