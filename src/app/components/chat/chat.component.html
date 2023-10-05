@@ -14,23 +14,27 @@
     CHAT
     <div class="closeIcon" (click)="displayChat = false">x</div>
   </div>
-
   <div class="card-body">
-    <div id="containerMessages" class="containerMessages h-100">
-      <p
+    <div id="containerMessages" class="containerMessages">
+      <div
         *ngFor="let mssg of messages"
         class="mssg p-2"
         [ngClass]="loggedUser.uid == mssg.from ? 'sent' : 'received'"
       >
-        {{ mssg.text }}
-      </p>
+        <div class="message-header">
+          <strong class="name">{{ mssg.name }}</strong>
+        </div>
+        <div class="message-content">
+          {{ mssg.text }}
+        </div>
+        <div class="message-footer">
+          <span class="hour">{{ mssg.date }}</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <form
-    class="card-footer text-body-secondary input-group"
-    (ngSubmit)="sendMessage()"
-  >
+  <form class="card-footer text-muted input-group" (ngSubmit)="sendMessage()">
     <input
       type="text"
       class="form-control"

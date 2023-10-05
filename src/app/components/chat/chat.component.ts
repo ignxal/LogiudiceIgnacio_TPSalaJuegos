@@ -13,15 +13,21 @@ export class ChatComponent {
   messages: any = [
     {
       from: 'id',
+      name: 'Johnny Estudio',
       text: 'Hola',
+      date: `22:25`,
     },
     {
       from: 'id2',
+      name: 'Armando Esteban',
       text: 'Hola 2',
+      date: `22:31`,
     },
     {
       from: 'id3',
+      name: 'Quito',
       text: 'Buenas !!!',
+      date: this._getCurrentFormattedHours(),
     },
   ];
   constructor(private authService: AuthService) {}
@@ -34,10 +40,12 @@ export class ChatComponent {
 
   sendMessage() {
     if (!this.newMessage) return;
-
+    console.log(this.loggedUser);
     const mssg = {
       from: this.loggedUser.uid,
+      name: this.loggedUser.displayName,
       text: this.newMessage,
+      date: this._getCurrentFormattedHours(),
     };
 
     this.messages.push(mssg);
@@ -46,6 +54,17 @@ export class ChatComponent {
     setTimeout(() => {
       this.scrollToTheLastElementByClassName();
     }, 20);
+  }
+
+  _getCurrentFormattedHours() {
+    const currentDate = new Date();
+
+    const hours = currentDate.getHours().toString().padStart(2, '0');
+    const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+
+    const formattedDate = `${hours}:${minutes}`;
+
+    return formattedDate;
   }
 
   scrollToTheLastElementByClassName() {

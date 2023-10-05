@@ -44,14 +44,14 @@ export class LoginComponent {
   }
 
   onLoginGoogle() {
-    const { email, password } = this.usuario;
+    const { email } = this.usuario;
     const userObj = {
       email: email,
       login_date: Date.now(),
     };
 
     this.authService
-      .loginWithGoogle(email, password)
+      .loginWithGoogle()
       .then(() => {
         this.database
           .create('users_activity', userObj)
