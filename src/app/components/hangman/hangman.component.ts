@@ -35,7 +35,6 @@ export class HangmanComponent implements OnInit {
     'Ñ',
   ];
   keyboardThirdRow: Array<string> = ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Send'];
-
   words: Array<string> = [
     'EDIFICIO',
     'MARIPOSA',
@@ -197,112 +196,141 @@ export class HangmanComponent implements OnInit {
       }
     });
   }
-
   send() {
+    let found = this.updateFormedWord();
+
+    if (!found) {
+      this.handleMistake();
+    }
+
+    if (this.mistakes === 6) {
+      this.handleGameLoss();
+    }
+
+    if (this.checkIfWon()) {
+      this.handleGameWin();
+    }
+  }
+
+  updateFormedWord(): boolean {
     let found = false;
-    let won = true;
 
     for (let i = 0; i < this.randomWord.length; i++) {
-      if (this.randomWord[i] == this.chosenLetter) {
+      if (this.randomWord[i] === this.chosenLetter) {
         this.formedWord[i] = this.chosenLetter;
-        document
-          .getElementById(this.chosenLetter)
-          ?.style.setProperty('background-color', '#69d57b');
-        document
-          .getElementById(this.chosenLetter)
-          ?.style.setProperty('border-color', '#69d57b');
+        this.updateElementStyle(this.chosenLetter, '#69d57b');
         found = true;
       }
     }
 
-    if (!found) {
-      this.mistakes++;
+    return found;
+  }
 
-      document
-        .getElementById(this.chosenLetter)
-        ?.style.setProperty('background-color', '#a1a1a1');
-      document
-        .getElementById(this.chosenLetter)
-        ?.style.setProperty('border-color', '#6a6a6a');
+  handleMistake() {
+    this.mistakes++;
 
-      if (this.mistakes == 6) {
+    this.updateElementStyle(this.chosenLetter, '#a1a1a1', '#6a6a6a');
+  }
+
+  handleGameLoss() {
+    this.updateScore();
+
+    Swal.fire({
+      title: 'Te quedaste sin vidas!',
+      html:
+        "La palabra era '" +
+        this.randomWord +
+        "'.<br>Puntaje: " +
+        this.score +
+        '<br>Record: ' +
+        this.highestHangmanScore,
+      icon: 'error',
+      position: 'center',
+      confirmButtonColor: '#4add87',
+      confirmButtonText: 'Reintentar',
+      showCancelButton: true,
+      cancelButtonColor: '#ca4949',
+      cancelButtonText: 'Volver al menú',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    }).then((result: { isConfirmed: any }) => {
+      if (result.isConfirmed) {
+        this.score = 0;
+        this.createWord();
+      } else {
+        this.router.navigateByUrl('home');
+      }
+    });
+  }
+
+  checkIfWon(): boolean {
+    return this.formedWord.every((letter) => letter !== '_ ');
+  }
+
+  handleGameWin() {
+    this.score++;
+
+    this.updateElementStyle('points', '#4add87', '#4add87', 'pulsate-fwd');
+
+    setTimeout(() => {
+      this.updateElementStyle('points', '', '', 'pulsate-fwd');
+    }, 1000);
+
+    Swal.fire({
+      title: 'Ganaste!',
+      text: "La palabra es '" + this.randomWord + "'.",
+      icon: 'success',
+      position: 'center',
+      confirmButtonColor: '#4add87',
+      confirmButtonText: 'Jugar de vuelta',
+      showCancelButton: true,
+      cancelButtonColor: '#ca4949',
+      cancelButtonText: 'Volver al menú',
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    }).then((result: { isConfirmed: any }) => {
+      if (result.isConfirmed) {
+        this.createWord();
+      } else {
         this.updateScore();
 
         Swal.fire({
-          title: 'Te quedaste sin vidas!',
-          html:
-            "La palabra era '" +
-            this.randomWord +
-            "'." +
-            '<br>Puntaje: ' +
+          title:
+            'Puntaje: ' +
             this.score +
             '<br>Record: ' +
             this.highestHangmanScore,
-          icon: 'error',
-          position: 'center',
-          confirmButtonColor: '#4add87',
-          confirmButtonText: 'Reintentar',
-          showCancelButton: true,
-          cancelButtonColor: '#ca4949',
-          cancelButtonText: 'Volver al menú',
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-        }).then((result: { isConfirmed: any }) => {
-          if (result.isConfirmed) {
-            this.score = 0;
-            this.createWord();
-          } else {
-            this.router.navigateByUrl('home');
-          }
         });
+
+        this.router.navigateByUrl('home');
       }
-    }
+    });
+  }
 
-    for (let i = 0; i < this.randomWord.length; i++) {
-      if (this.formedWord[i] == '_ ') {
-        won = false;
-        break;
+  updateElementStyle(
+    elementId: string,
+    bgColor: string = '',
+    borderColor: string = '',
+    className: string = ''
+  ): void {
+    const element = document.getElementById(elementId);
+
+    if (element) {
+      if (bgColor) {
+        element.style.setProperty('background-color', bgColor);
       }
-    }
 
-    if (won) {
-      this.score++;
+      if (borderColor) {
+        element.style.setProperty('border-color', borderColor);
+      }
 
-      document.getElementById('points')?.classList.add('pulsate-fwd');
+      if (className) {
+        element.classList.add(className);
 
-      setTimeout(() => {
-        document.getElementById('points')?.classList.remove('pulsate-fwd');
-      }, 1000);
-
-      Swal.fire({
-        title: 'Ganaste!',
-        text: "La palabra es '" + this.randomWord + "'.",
-        icon: 'success',
-        position: 'center',
-        confirmButtonColor: '#4add87',
-        confirmButtonText: 'Jugar de vuelta',
-        showCancelButton: true,
-        cancelButtonColor: '#ca4949',
-        cancelButtonText: 'Volver al menú',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-      }).then((result: { isConfirmed: any }) => {
-        if (result.isConfirmed) {
-          this.createWord();
-        } else {
-          this.updateScore();
-
-          Swal.fire({
-            title:
-              'Puntaje: ' +
-              this.score +
-              '<br>Record: ' +
-              this.highestHangmanScore,
-          });
-
-          this.router.navigateByUrl('home');
-        }
-      });
+        setTimeout(() => {
+          element.classList.remove(className);
+        }, 1000);
+      }
     }
   }
 
