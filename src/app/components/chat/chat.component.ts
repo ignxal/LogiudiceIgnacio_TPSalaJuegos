@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { DatabaseService } from '../../services/database.service';
 
 @Component({
   selector: 'app-chat',
@@ -10,33 +11,42 @@ export class ChatComponent {
   displayChat: boolean = false;
   loggedUser: any;
   newMessage: string = '';
-  messages: any = [
-    {
-      from: 'id',
-      name: 'Johnny Estudio',
-      text: 'Hola',
-      date: `22:25`,
-    },
-    {
-      from: 'id2',
-      name: 'Armando Esteban',
-      text: 'Hola 2',
-      date: `22:31`,
-    },
-    {
-      from: 'id3',
-      name: 'Quito',
-      text: 'Buenas !!!',
-      date: this._getCurrentFormattedHours(),
-    },
-  ];
+  messages: any = [];
+  newMessages: any = [];
   subscription: any;
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private database: DatabaseService
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.authService.getUserLogged().subscribe((u) => {
       this.loggedUser = u;
     });
+
+    this.database.getAll('chat_history').subscribe(
+      (querySnapshot) => {
+        if (querySnapshot.empty) {
+          console.log('Documents not found');
+          return;
+        }
+        const docs: any = [];
+
+        querySnapshot.forEach((doc) => {
+          const data: any = doc.data();
+          docs.push(data);
+        });
+
+        docs.sort((a: any, b: any) => a.date - b.date);
+        docs.forEach((doc: any) => {
+          doc.date = this._getFormattedHours(doc.date);
+          this.messages.push(doc);
+        });
+      },
+      (err) => {
+        console.error('Error reading chat history:', err);
+      }
+    );
   }
 
   ngOnDestroy(): void {
@@ -47,15 +57,20 @@ export class ChatComponent {
 
   sendMessage() {
     if (!this.newMessage) return;
-
-    const mssg = {
+    const currentDate = Date.now();
+    this.messages.push({
       from: this.loggedUser.uid,
       name: this.loggedUser.displayName,
       text: this.newMessage,
-      date: this._getCurrentFormattedHours(),
-    };
+      date: this._getFormattedHours(currentDate),
+    });
+    this.database.create('chat_history', {
+      from: this.loggedUser.uid,
+      name: this.loggedUser.displayName,
+      text: this.newMessage,
+      date: currentDate,
+    });
 
-    this.messages.push(mssg);
     this.newMessage = '';
 
     setTimeout(() => {
@@ -63,11 +78,11 @@ export class ChatComponent {
     }, 20);
   }
 
-  _getCurrentFormattedHours() {
-    const currentDate = new Date();
+  _getFormattedHours(dateUnix: number) {
+    const date = new Date(dateUnix);
 
-    const hours = currentDate.getHours().toString().padStart(2, '0');
-    const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
 
     const formattedDate = `${hours}:${minutes}`;
 

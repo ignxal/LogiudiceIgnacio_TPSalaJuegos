@@ -15,16 +15,12 @@ export class DatabaseService {
     return await this.firestore.collection(collection).add(data);
   }
 
-  async getAll(collection: string) {
+  getAll(collection: string) {
     if (!collection) {
-      return null;
+      throw new Error('Collection name is required');
     }
-    try {
-      return await this.firestore.collection(collection).snapshotChanges();
-    } catch (err) {
-      console.log('error in getAll: ', err);
-      return null;
-    }
+
+    return this.firestore.collection(collection).get();
   }
 
   async getByFieldValue(collection: string, fieldName: string, value: string) {
