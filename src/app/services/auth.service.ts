@@ -9,32 +9,17 @@ export class AuthService {
   constructor(private afauth: AngularFireAuth) {}
 
   async register(email: string, password: string) {
-    try {
-      return await this.afauth.createUserWithEmailAndPassword(email, password);
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
+    return await this.afauth.createUserWithEmailAndPassword(email, password);
   }
 
   async login(email: string, password: string) {
-    try {
-      return await this.afauth.signInWithEmailAndPassword(email, password);
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
+    return await this.afauth.signInWithEmailAndPassword(email, password);
   }
 
   async loginWithGoogle() {
-    try {
-      return await this.afauth.signInWithPopup(
-        new firebase.auth.GoogleAuthProvider()
-      );
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
+    return await this.afauth.signInWithPopup(
+      new firebase.auth.GoogleAuthProvider()
+    );
   }
 
   getUserLogged() {

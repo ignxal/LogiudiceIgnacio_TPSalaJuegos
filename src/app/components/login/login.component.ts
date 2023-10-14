@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,11 @@ export class LoginComponent {
     private router: Router,
     private database: DatabaseService
   ) {}
+
+  onAutoComplete() {
+    this.usuario.email = 'user_test@gmail.com';
+    this.usuario.password = 'test123';
+  }
 
   onLogin() {
     const { email, password } = this.usuario;
@@ -39,7 +45,19 @@ export class LoginComponent {
           });
       })
       .catch((err) => {
-        console.log(err);
+        Swal.fire({
+          title: 'Error de autenticación',
+          html: 'Las credenciales no son correctas',
+          icon: 'error',
+          position: 'center',
+          confirmButtonColor: '#ed566f',
+          confirmButtonText: 'Ok',
+          showCancelButton: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then((result: { isConfirmed: any }) => {
+          console.log(err);
+        });
       });
   }
 
@@ -56,7 +74,7 @@ export class LoginComponent {
         this.database
           .create('users_activity', userObj)
           .then(() => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
           })
           .catch((err) => {
             console.error(err);

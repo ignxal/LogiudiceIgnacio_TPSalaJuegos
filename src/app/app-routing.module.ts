@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
+  { pathMatch: 'full', path: '', redirectTo: 'home' },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'aboutme', component: QuienSoyComponent },
@@ -20,7 +21,6 @@ const routes: Routes = [
       import('./components/games/games.module').then((m) => m.GamesModule),
   },
   { path: '**', component: PageNotFoundComponent },
-  { pathMatch: 'full', path: '', redirectTo: 'home' },
 ];
 
 @NgModule({
