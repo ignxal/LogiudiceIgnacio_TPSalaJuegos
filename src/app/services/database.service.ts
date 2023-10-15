@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private database: AngularFireDatabase
+  ) {}
 
   async create(collection: string, data: object) {
     if (!collection || !data) {
@@ -21,6 +25,10 @@ export class DatabaseService {
     }
 
     return this.firestore.collection(collection).get();
+  }
+
+  getDatabase(databaseName: string) {
+    return this.database.list(`/${databaseName}`);
   }
 
   async getByFieldValue(collection: string, fieldName: string, value: string) {

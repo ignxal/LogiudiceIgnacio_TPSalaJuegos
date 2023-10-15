@@ -7,5 +7,6 @@ export const environment = {
     messagingSenderId: '9425799626',
     appId: '1:9425799626:web:699574f0fca11f020be733',
     measurementId: 'G-DBLZ9EQH4C',
+    databaseURL: 'https://saladejuegos-lab4-default-rtdb.firebaseio.com',
   },
 };

@@ -1,7 +1,7 @@
 <div
   *ngIf="loggedUser && !displayChat"
   class="chatIconContainer"
-  (click)="displayChat = true"
+  (click)="onOpen()"
 >
   <img
     src="https://es.seaicons.com/wp-content/uploads/2015/10/Chat-icon.png"
@@ -15,7 +15,7 @@
     <div class="closeIcon" (click)="displayChat = false">x</div>
   </div>
   <div class="card-body">
-    <div id="containerMessages" class="containerMessages">
+    <div id="containerMessages" #containerMessages class="containerMessages">
       <div
         *ngFor="let mssg of messages"
         class="mssg p-2"

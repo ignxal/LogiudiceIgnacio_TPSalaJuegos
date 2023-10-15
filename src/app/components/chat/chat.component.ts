@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
 
@@ -8,65 +8,52 @@ import { DatabaseService } from '../../services/database.service';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent {
+  @ViewChild('containerMessages') containerMessages!: ElementRef;
   displayChat: boolean = false;
   loggedUser: any;
   newMessage: string = '';
   messages: any = [];
   newMessages: any = [];
-  subscription: any;
+  subscriptionAuth: any;
+  subscriptionDB: any;
+  db: any;
   constructor(
     private authService: AuthService,
     private database: DatabaseService
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.authService.getUserLogged().subscribe((u) => {
+    this.subscriptionAuth = this.authService.getUserLogged().subscribe((u) => {
       this.loggedUser = u;
     });
+    this.db = this.database.getDatabase('chat_history');
 
-    this.database.getAll('chat_history').subscribe(
-      (querySnapshot) => {
-        if (querySnapshot.empty) {
-          console.log('Documents not found');
-          return;
-        }
-        const docs: any = [];
-
-        querySnapshot.forEach((doc) => {
-          const data: any = doc.data();
-          docs.push(data);
-        });
-
-        docs.sort((a: any, b: any) => a.date - b.date);
-        docs.forEach((doc: any) => {
-          doc.date = this._getFormattedHours(doc.date);
-          this.messages.push(doc);
-        });
-      },
-      (err) => {
-        console.error('Error reading chat history:', err);
-      }
-    );
+    this.subscriptionDB = this.db.valueChanges().subscribe((data: any) => {
+      data.sort((a: any, b: any) => a.date - b.date);
+      data.forEach((x: any) => {
+        x.date = this._getFormattedHours(x.date);
+      });
+      this.messages = data;
+    });
   }
 
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.subscriptionAuth) {
+      this.subscriptionAuth.unsubscribe();
+    }
+
+    if (this.subscriptionDB) {
+      this.subscriptionDB.unsubscribe();
     }
   }
 
   sendMessage() {
     if (!this.newMessage) return;
     const currentDate = Date.now();
-    this.messages.push({
+
+    this.db.push({
       from: this.loggedUser.uid,
-      name: this.loggedUser.displayName,
-      text: this.newMessage,
-      date: this._getFormattedHours(currentDate),
-    });
-    this.database.create('chat_history', {
-      from: this.loggedUser.uid,
-      name: this.loggedUser.displayName,
+      name: this.loggedUser.displayName || this.loggedUser.email.split('@')[0],
       text: this.newMessage,
       date: currentDate,
     });
@@ -80,23 +67,28 @@ export class ChatComponent {
 
   _getFormattedHours(dateUnix: number) {
     const date = new Date(dateUnix);
-
     const hours = date.getHours().toString().padStart(2, '0');
     const minutes = date.getMinutes().toString().padStart(2, '0');
-
     const formattedDate = `${hours}:${minutes}`;
 
     return formattedDate;
   }
 
   scrollToTheLastElementByClassName() {
-    const container = document.getElementById('containerMessages');
-    const elements = document.getElementsByClassName('mssg');
-    const lastElement: any = elements[elements.length - 1];
-    const toppos = lastElement.offsetTop;
+    setTimeout(() => {
+      const container = this.containerMessages.nativeElement;
+      const elements = document.getElementsByClassName('mssg');
+      const lastElement: any = elements[elements.length - 1];
+      const toppos = lastElement.offsetTop;
 
-    if (container) {
-      container.scrollTop = toppos;
-    }
+      if (container) {
+        container.scrollTop = toppos;
+      }
+    });
+  }
+
+  onOpen() {
+    this.displayChat = true;
+    this.scrollToTheLastElementByClassName();
   }
 }
