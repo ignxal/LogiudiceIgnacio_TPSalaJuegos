@@ -1,0 +1,102 @@
+<br />
+<div
+  class="container py-5 px-5 rounded-3 shadow-lg text-white"
+  style="max-width: 1040px"
+>
+  <h2 class="pb-2 border-bottom">Logle</h2>
+  <h3 style="margin-top: 5%; float: left">
+    <img width="50px" id="score" src="../../../assets/score.png" />
+    {{ this.score }}
+  </h3>
+  <div style="text-align: center; margin-top: 5%">
+    <div class="logo">
+      <div class="logocont">
+        <img
+          width="250px"
+          id="3"
+          src="../../../assets/logle/{{ this.showFragments[3] }}"
+        />
+        <img
+          width="250px"
+          id="2"
+          src="../../../assets/logle/{{ this.showFragments[2] }}"
+        />
+        <img
+          width="250px"
+          id="1"
+          src="../../../assets/logle/{{ this.showFragments[1] }}"
+        />
+        <img
+          width="250px"
+          id="0"
+          src="../../../assets/logle/{{ this.showFragments[0] }}"
+        />
+      </div>
+    </div>
+
+    <div style="margin: auto">
+      <div style="height: 130px">
+        <div
+          style="
+            background-color: #00000075;
+            height: 35.34px;
+            margin-bottom: 10px;
+          "
+          *ngFor="let word of this.words"
+        >
+          <h2 style="text-align: center; display: contents">
+            {{ this.word }}
+          </h2>
+        </div>
+      </div>
+      <div style="text-align: center">
+        <h2 style="text-align: center; height: 40px">
+          {{ this.currentWord }}
+        </h2>
+
+        <div style="margin: auto">
+          <button
+            *ngFor="let letter of this.keyboardFirstRow"
+            type="button"
+            class="btn btn-light btn-lg px-4 gap-3"
+            style="margin-right: 3px"
+            id="{{ letter }}"
+            (click)="updateLetter(letter)"
+          >
+            {{ letter }}
+          </button>
+        </div>
+        <div style="margin: auto; margin-top: 3px">
+          <button
+            *ngFor="let letter of this.keyboardSecondRow"
+            type="button"
+            class="btn btn-light btn-lg px-4 gap-3"
+            style="margin-right: 3px"
+            id="{{ letter }}"
+            (click)="updateLetter(letter)"
+          >
+            {{ letter }}
+          </button>
+        </div>
+        <div style="margin: auto; margin-top: 3px">
+          <button
+            *ngFor="let letter of this.keyboardThirdRow"
+            type="button"
+            class="btn btn-light btn-lg px-4 gap-3"
+            style="margin-right: 3px"
+            id="{{ letter }}"
+            (click)="updateLetter(letter)"
+          >
+            {{ letter }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div style="margin: auto">
+      <div class="green"></div>
+      <h5>La letra está en el nombre.</h5>
+      <div class="grey"></div>
+      <h5>La letra NO está en el nombre.</h5>
+    </div>
+  </div>
+</div>

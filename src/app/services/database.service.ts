@@ -4,12 +4,14 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Questions } from '../models/questions';
+import { Logos } from '../models/logos';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
   questionsCollection = 'questions';
+  logosCollection = 'logos';
   constructor(
     private firestore: AngularFirestore,
     private database: AngularFireDatabase
@@ -53,6 +55,17 @@ export class DatabaseService {
   getQuestions(): Observable<Questions[]> {
     return this.firestore
       .collection<Questions>(this.questionsCollection)
+      .get()
+      .pipe(
+        map((querySnapshot) => {
+          return querySnapshot.docs.map((doc) => doc.data());
+        })
+      );
+  }
+
+  getLogos(): Observable<Logos[]> {
+    return this.firestore
+      .collection<Logos>(this.logosCollection)
       .get()
       .pipe(
         map((querySnapshot) => {

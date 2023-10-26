@@ -22,6 +22,11 @@ const routes: Routes = [
         loadChildren: () =>
           import(`./asked/asked.module`).then((m) => m.AskedModule),
       },
+      {
+        path: 'logle',
+        loadChildren: () =>
+          import(`./logle/logle.module`).then((m) => m.LogleModule),
+      },
     ],
   },
 ];
