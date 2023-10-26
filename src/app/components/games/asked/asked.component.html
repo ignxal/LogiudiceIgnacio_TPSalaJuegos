@@ -1,0 +1,190 @@
+<br />
+<div
+  class="container py-5 px-5 rounded-3 shadow-lg text-white"
+  style="max-width: 1040px; min-height: 385px"
+>
+  <h2 class="pb-2 border-bottom">
+    Preguntados
+    <img
+      *ngIf="this.category != ''"
+      style="margin-left: 175px; margin-top: -20px"
+      width="50px"
+      src="../../../assets/asked/{{ this.category }}.gif"
+    />
+    {{ this.category }}
+  </h2>
+  <div *ngIf="this.randomQuestion == ''" class="row items">
+    <div class="card col-sm-6">
+      <div class="card-img">
+        <img
+          class="active"
+          width="150px"
+          src="../../../assets/asked/history.gif"
+        />
+      </div>
+      <button
+        class="btn btn-outline-warning btn-lg px-4 gap-3"
+        (click)="chooseCategory('history')"
+      >
+        Historia
+      </button>
+    </div>
+    <div class="card col-sm-6">
+      <div class="card-img">
+        <img
+          class="active"
+          style="margin: 15px"
+          width="120px"
+          src="../../../assets/asked/geography.gif"
+        />
+      </div>
+      <button
+        class="btn btn-outline-info btn-lg px-4 gap-3"
+        (click)="chooseCategory('geography')"
+      >
+        Geografía
+      </button>
+    </div>
+    <div class="card col-sm-6">
+      <div class="card-img">
+        <img
+          class="active"
+          width="150px"
+          src="../../../assets/asked/science.gif"
+        />
+      </div>
+      <button
+        class="btn btn-outline-success btn-lg px-4 gap-3"
+        (click)="chooseCategory('science')"
+      >
+        Ciencia
+      </button>
+    </div>
+    <div class="card col-sm-6">
+      <div class="card-img">
+        <img
+          class="active"
+          width="150px"
+          src="../../../assets/asked/movies.gif"
+        />
+      </div>
+      <button
+        class="btn btn-outline-danger btn-lg px-4 gap-3"
+        (click)="chooseCategory('movies')"
+      >
+        Cine
+      </button>
+    </div>
+    <div class="card col-sm-6">
+      <div class="card-img">
+        <img
+          class="active"
+          width="150px"
+          src="../../../assets/asked/random.gif"
+        />
+      </div>
+      <button
+        class="btn btn-outline-light btn-lg px-4 gap-3"
+        (click)="chooseCategory('random')"
+      >
+        Al azar
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="this.randomQuestion != ''">
+    <h3 style="margin-top: 3vh; float: left">
+      <img width="50px" id="puntos" src="../../../assets/score.png" />
+      {{ this.score }}
+    </h3>
+
+    <div class="lifes">
+      <img
+        width="50px"
+        id="1"
+        *ngIf="this.attempts > 0"
+        src="../../../assets/asked/haveLife.png"
+      />
+      <img
+        width="50px"
+        *ngIf="this.attempts < 1"
+        src="../../../assets/asked/dontHaveLife.png"
+      />
+      <img
+        width="50px"
+        id="2"
+        *ngIf="this.attempts > 1"
+        src="../../../assets/asked/haveLife.png"
+      />
+      <img
+        width="50px"
+        *ngIf="this.attempts < 3"
+        src="../../../assets/asked/dontHaveLife.png"
+      />
+      <img
+        width="50px"
+        id="3"
+        *ngIf="this.attempts > 2"
+        src="../../../assets/asked/haveLife.png"
+      />
+      <img
+        width="50px"
+        *ngIf="this.attempts < 2"
+        src="../../../assets/asked/dontHaveLife.png"
+      />
+    </div>
+
+    <div class="result">
+      <img
+        class="scale-in-center"
+        *ngIf="this.image == 'wrong'"
+        src="../../../assets/asked/wrong.png"
+      />
+      <img
+        class="scale-in-center"
+        *ngIf="this.image == 'right'"
+        src="../../../assets/asked/right.png"
+      />
+    </div>
+
+    <div class="header">
+      <img
+        width="100px"
+        *ngIf="this.randomQuestion.poster"
+        [src]="this.randomQuestion.poster"
+      />
+      <h3>{{ this.randomQuestion.question }}</h3>
+      <h2>{{ this.time }}</h2>
+    </div>
+    <div class="answer">
+      <button
+        class="btn btn-light btn-lg px-4 gap-3"
+        id="{{ this.randomQuestion.answers[0] }}"
+        (click)="answer(this.randomQuestion.answers[0])"
+      >
+        {{ this.randomQuestion.answers[0] }}
+      </button>
+      <button
+        class="btn btn-light btn-lg px-4 gap-3"
+        id="{{ this.randomQuestion.answers[1] }}"
+        (click)="answer(this.randomQuestion.answers[1])"
+      >
+        {{ this.randomQuestion.answers[1] }}
+      </button>
+      <button
+        class="btn btn-light btn-lg px-4 gap-3"
+        id="{{ this.randomQuestion.answers[2] }}"
+        (click)="answer(this.randomQuestion.answers[2])"
+      >
+        {{ this.randomQuestion.answers[2] }}
+      </button>
+      <button
+        class="btn btn-light btn-lg px-4 gap-3"
+        id="{{ this.randomQuestion.answers[3] }}"
+        (click)="answer(this.randomQuestion.answers[3])"
+      >
+        {{ this.randomQuestion.answers[3] }}
+      </button>
+    </div>
+  </div>
+</div>

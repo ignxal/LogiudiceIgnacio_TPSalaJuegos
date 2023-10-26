@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Questions } from '../models/questions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DatabaseService {
+  questionsCollection = 'questions';
   constructor(
     private firestore: AngularFirestore,
     private database: AngularFireDatabase
@@ -44,6 +48,17 @@ export class DatabaseService {
       console.log('Error in getById: ', err);
       return null;
     }
+  }
+
+  getQuestions(): Observable<Questions[]> {
+    return this.firestore
+      .collection<Questions>(this.questionsCollection)
+      .get()
+      .pipe(
+        map((querySnapshot) => {
+          return querySnapshot.docs.map((doc) => doc.data());
+        })
+      );
   }
 
   updateByFieldValue(

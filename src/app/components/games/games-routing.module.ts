@@ -17,6 +17,11 @@ const routes: Routes = [
         loadChildren: () =>
           import(`./hangman/hangman.module`).then((m) => m.HangmanModule),
       },
+      {
+        path: 'asked',
+        loadChildren: () =>
+          import(`./asked/asked.module`).then((m) => m.AskedModule),
+      },
     ],
   },
 ];

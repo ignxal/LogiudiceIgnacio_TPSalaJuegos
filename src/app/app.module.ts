@@ -12,8 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterComponent } from './components/register/register.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { ChatComponent } from './components/chat/chat.component';
-import { HangmanRoutingModule } from './components/games/hangman/hangman-routing.module';
-import { HigherorlowerRoutingModule } from './components/games/higherorlower/higherorlower-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,8 +30,7 @@ import { HigherorlowerRoutingModule } from './components/games/higherorlower/hig
     FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     NgbModule,
-    HangmanRoutingModule,
-    HigherorlowerRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
