@@ -2,47 +2,49 @@
   <div class="body">
     <div class="sidebar">
       <ul>
-        <li><a href="#">⭐ - link</a></li>
         <li><a routerLink="/games/hangman">𓍯 - Ahorcado</a></li>
         <li><a routerLink="/games/higherorlower">🃏 - Mayor o Menor</a></li>
         <li><a routerLink="/games/asked">❓ - Preguntados</a></li>
-        <li><a routerLink="/games/logle">❓ - Logle</a></li>
+        <li><a routerLink="/games/logle">⭐ - Logle</a></li>
         <li><a href="aboutme">🦸🏽‍♂️ - About me!</a></li>
       </ul>
     </div>
     <div class="container">
-      <div class="card">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
-        eveniet? Dolorem dignissimos maiores non delectus possimus dolor nulla
-        repudiandae vitae provident quae, obcaecati ipsam unde impedit corrupti
-        veritatis minima porro?
+      <div class="card" routerLink="/games/hangman">
+        <div class="card-content">
+          <div class="image hangman"></div>
+          <div class="text">Hangman</div>
+        </div>
       </div>
-      <div class="card">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi quaerat
-        qui iure ipsam maiores velit tempora, deleniti nesciunt fuga suscipit
-        alias vero rem, corporis officia totam saepe excepturi odit ea.
+      <div class="card" routerLink="/games/higherorlower">
+        <div class="card-content">
+          <div class="image higherorlower"></div>
+          <div class="text">Mayor o menor</div>
+        </div>
       </div>
-      <div class="card">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis illo ex
-        quas, commodi eligendi aliquam ut, dolor, atque aliquid iure nulla.
-        Laudantium optio accusantium quaerat fugiat, natus officia esse autem?
+      <div class="card" routerLink="/games/asked">
+        <div class="card-content">
+          <div class="image asked"></div>
+          <div class="text">Preguntados</div>
+        </div>
       </div>
-      <div class="card">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus
-        nihil impedit eius amet adipisci dolorum vel nostrum sit excepturi
-        corporis tenetur cum, dolore incidunt blanditiis. Unde earum minima
-        laboriosam eos!
+      <div class="card" routerLink="/games/logle">
+        <div class="card-content">
+          <div class="image logle"></div>
+          <div class="text">Logle</div>
+        </div>
       </div>
-      <div class="card">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis illo ex
-        quas, commodi eligendi aliquam ut, dolor, atque aliquid iure nulla.
-        Laudantium optio accusantium quaerat fugiat, natus officia esse autem?
+      <div class="card" routerLink="/survey">
+        <div class="card-content">
+          <div class="image survey"></div>
+          <div class="text">Encuesta</div>
+        </div>
       </div>
-      <div class="card">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus
-        nihil impedit eius amet adipisci dolorum vel nostrum sit excepturi
-        corporis tenetur cum, dolore incidunt blanditiis. Unde earum minima
-        laboriosam eos!
+      <div class="card" routerLink="/aboutme">
+        <div class="card-content">
+          <div class="image aboutme"></div>
+          <div class="text">Sobre mí</div>
+        </div>
       </div>
     </div>
   </div>

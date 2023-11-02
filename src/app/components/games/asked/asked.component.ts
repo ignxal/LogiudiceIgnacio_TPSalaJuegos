@@ -12,7 +12,7 @@ import { Questions } from 'src/app/models/questions';
   styleUrls: ['./asked.component.scss'],
 })
 export class AskedComponent implements OnInit {
-  questions: any = [];
+  questions: Questions[] = [];
   randomQuestion: any = '';
   attempts: number = 3;
   category: string = '';
@@ -315,8 +315,8 @@ export class AskedComponent implements OnInit {
     this.displayeds = 0;
     this.time = 20;
 
-    for (let preg of this.questions) {
-      preg.displayed = false;
+    for (let x of this.questions) {
+      x.displayed = false;
     }
   }
 }
