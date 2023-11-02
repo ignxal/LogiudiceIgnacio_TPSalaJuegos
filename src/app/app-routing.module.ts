@@ -20,6 +20,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./components/games/games.module').then((m) => m.GamesModule),
   },
+  {
+    path: 'survey',
+    loadChildren: () =>
+      import('./components/survey/survey.module').then((m) => m.SurveyModule),
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 

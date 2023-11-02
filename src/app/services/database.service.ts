@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Questions } from '../models/questions';
 import { Logos } from '../models/logos';
+import { Surveys } from '../models/surveys';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,8 @@ import { Logos } from '../models/logos';
 export class DatabaseService {
   questionsCollection = 'questions';
   logosCollection = 'logos';
+  surveyCollection = 'surveys';
+
   constructor(
     private firestore: AngularFirestore,
     private database: AngularFireDatabase
@@ -119,5 +122,21 @@ export class DatabaseService {
         console.log('Error in updateByFieldValue: ', err);
         return null;
       });
+  }
+
+  saveSurvey(survey: Surveys): Observable<any> {
+    return new Observable((observer) => {
+      this.firestore
+        .collection(this.surveyCollection)
+        .add(survey)
+        .then(() => {
+          observer.next(true);
+          observer.complete();
+        })
+        .catch((error) => {
+          console.error('Error al guardar el survey en Firestore', error);
+          observer.error(error);
+        });
+    });
   }
 }

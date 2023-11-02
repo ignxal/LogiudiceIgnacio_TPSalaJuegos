@@ -1,0 +1,126 @@
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Encuesta</h2>
+    </div>
+
+    <div class="row g-3" style="justify-content: center">
+      <div class="col-md-7 col-lg-8">
+        <form class="needs-validation" (ngSubmit)="submitSurvey()" novalidate>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="username" class="form-label"
+                >Nombre y Apellido:</label
+              >
+              <input
+                type="text"
+                id="username"
+                name="username"
+                [(ngModel)]="survey.username"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">Por favor ingrese su nombre.</div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="age" class="form-label">Edad:</label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                [(ngModel)]="survey.age"
+                class="form-control"
+                required
+                min="18"
+                max="99"
+              />
+              <div class="invalid-feedback">
+                Por favor ingresa una edad válida (+18)/(-99).
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="phone" class="form-label">Número de Teléfono:</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                [(ngModel)]="survey.phone"
+                class="form-control"
+                required
+                pattern="[0-9]{10}"
+              />
+              <div class="invalid-feedback">
+                Por favor ingresa un numero de telefono válido.
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="firstQuestion" class="form-label"
+                >¿Que cambiarías o mejorarías en la sala de juegos?</label
+              >
+              <input
+                type="text"
+                id="firstQuestion"
+                name="firstQuestion"
+                [(ngModel)]="survey.firstQuestion"
+                class="form-control"
+                required
+              />
+              <div class="invalid-feedback">Por favor ingresa tu opinión.</div>
+            </div>
+
+            <div class="col-12">
+              <label for="secondQuestion" class="form-label"
+                >¿Cuál es tu opinión sobre nuestra comunidad?</label
+              >
+              <textarea
+                id="secondQuestion"
+                name="secondQuestion"
+                [(ngModel)]="survey.secondQuestion"
+                class="form-control"
+                required
+              ></textarea>
+              <div class="invalid-feedback">Tú opinion importa!</div>
+            </div>
+
+            <div class="col-12">
+              <label for="thirdQuestion" class="form-label"
+                >¿Cuál es tu juego favorito?</label
+              >
+              <select
+                id="thirdQuestion"
+                name="thirdQuestion"
+                [(ngModel)]="survey.thirdQuestion"
+                class="form-select"
+                required
+              >
+                <option value="logle">Logle</option>
+                <option value="higherorlower">Mayor o menor</option>
+                <option value="asked">Preguntados</option>
+                <option value="hangman">Ahorcado</option>
+              </select>
+              <div class="invalid-feedback">Te falto completar acá!</div>
+            </div>
+          </div>
+
+          <hr class="my-4" />
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">
+            <span
+              *ngIf="isSubmitting"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            <span *ngIf="!isSubmitting">Enviar respuesta</span>
+          </button>
+          <div *ngIf="message" class="alert alert-success" role="alert">
+            {{ message }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
