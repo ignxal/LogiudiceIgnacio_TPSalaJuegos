@@ -34,6 +34,7 @@ export class ChatComponent {
         x.date = this._getFormattedHours(x.date);
       });
       this.messages = data;
+      this.scrollToTheLastElementByClassName();
     });
   }
 
