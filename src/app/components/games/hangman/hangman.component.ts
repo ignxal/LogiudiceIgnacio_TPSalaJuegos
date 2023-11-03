@@ -34,7 +34,16 @@ export class HangmanComponent implements OnInit {
     'L',
     'Ñ',
   ];
-  keyboardThirdRow: Array<string> = ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Send'];
+  keyboardThirdRow: Array<string> = [
+    'Z',
+    'X',
+    'C',
+    'V',
+    'B',
+    'N',
+    'M',
+    'Enviar',
+  ];
   words: Array<string> = [
     'EDIFICIO',
     'MARIPOSA',
