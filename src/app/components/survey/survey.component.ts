@@ -44,7 +44,7 @@ export class SurveyComponent {
     });
 
     if (!this.validateForm()) {
-      console.warn('Datos de repartidor no válidos');
+      console.warn('Datos del survey no válidos');
       this.isSubmitting = false;
       return;
     }
